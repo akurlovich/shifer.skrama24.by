@@ -1,16 +1,30 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
+import { FC, Suspense } from 'react'
+import { Routes, Route } from "react-router";
+import { About } from './components/About/About';
+import { Cart } from './components/Cart/Cart';
+import { Home } from './components/Home/Home';
+import { PageNotFound } from './components/PageNotFound/PageNotFound';
+import MainLayout from './components/RoutersComponents/MainLayout/MainLayout';
 import './scss/main.scss'
 
-function App() {
+const App: FC = () => {
   // const [count, setCount] = useState(0)
 
   return (
-    <>
-      <h1>Продажа шифера по регионам Республики Беларусь.</h1>
-      <h3>Страница в разработке!</h3>
-    </>
+    // <Suspense fallback={<div>Loading...</div>}>
+      <Routes>
+        <Route path='/' element={<MainLayout/>}>
+          <Route index element={<Home/>}/> 
+          <Route path='cart' element={<Cart/>}>
+            {/* <Route path='*' element={<Cart/>}/> */}
+          </Route>
+          <Route path='about' element={<About/>}>
+            {/* <Route path='*' element={<About/>}/> */}
+          </Route>
+          <Route path="*" element={<PageNotFound/>}/>
+        </Route>
+      </Routes>
+    // </Suspense>
   )
 }
 
